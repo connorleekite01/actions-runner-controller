@@ -1,6 +1,6 @@
 ## githubConfigUrl is the GitHub url for where you want to configure runners
 ## ex: https://github.com/myorg/myrepo or https://github.com/myorg
-githubConfigUrl: ""
+githubConfigUrl: "https://github.com/connorleekite01/workflow_test"
 
 ## githubConfigSecret is the k8s secrets to use when auth with GitHub API.
 ## You can choose to use GitHub App or a PAT token
@@ -12,7 +12,7 @@ githubConfigSecret:
   #github_app_private_key: |
 
   ### GitHub PAT Configuration
-  github_token: ""
+  github_token: "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"
 ## If you have a pre-define Kubernetes secret in the same namespace the gha-runner-scale-set is going to deploy,
 ## you can also reference it via `githubConfigSecret: pre-defined-secret`.
 ## You need to make sure your predefined secret has all the required secret data set properly.
@@ -37,15 +37,15 @@ githubConfigSecret:
 #     - example.org
 
 ## maxRunners is the max number of runners the auto scaling runner set will scale up to.
-# maxRunners: 5
+maxRunners: 5
 
 ## minRunners is the min number of runners the auto scaling runner set will scale down to.
-# minRunners: 0
+minRunners: 0
 
-# runnerGroup: "default"
+runnerGroup: "default"
 
 ## name of the runner scale set to create.  Defaults to the helm release name
-# runnerScaleSetName: ""
+runnerScaleSetName: "arc-runner-set-2"
 
 ## A self-signed CA certificate for communication with the GitHub server can be
 ## provided using a config map key selector. If `runnerMountPath` is set, for
@@ -68,16 +68,16 @@ githubConfigSecret:
 #       key: ca.crt
 #   runnerMountPath: /usr/local/share/ca-certificates/
 
-# containerMode:
-#   type: "dind"  ## type can be set to dind or kubernetes
-#   ## the following is required when containerMode.type=kubernetes
-#   kubernetesModeWorkVolumeClaim:
-#     accessModes: ["ReadWriteOnce"]
-#     # For local testing, use https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/docs/quickstart.md to provide dynamic provision volume with storageClassName: openebs-hostpath
-#     storageClassName: "dynamic-blob-storage"
-#     resources:
-#       requests:
-#         storage: 1Gi
+containerMode:
+  type: "dind"  ## type can be set to dind or kubernetes
+  ## the following is required when containerMode.type=kubernetes
+  kubernetesModeWorkVolumeClaim:
+    accessModes: ["ReadWriteOnce"]
+    # For local testing, use https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/docs/quickstart.md to provide dynamic provision volume with storageClassName: openebs-hostpath
+    storageClassName: "dynamic-blob-storage"
+    resources:
+      requests:
+        storage: 1Gi
 
 ## template is the PodSpec for each runner Pod
 template:
